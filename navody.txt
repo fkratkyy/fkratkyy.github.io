@@ -1,0 +1,37 @@
+Roboto: Čistý a moderní sans-serif font.
+Open Sans: Všestranný sans-serif font vhodný pro různé typy obsahu.
+Lato: Příjemný sans-serif font s dobrou čitelností.
+Montserrat: Elegantní sans-serif font s geometrickým stylem.
+Roboto Slab: Slab-serif font, vhodný pro nadpisy a vyžší kontrast.
+Například pro Roboto by to vypadalo takto:
+
+css
+Copy code
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+Tento řádek byste měli vložit na začátek svého CSS souboru (nebo přímo do záhlaví HTML, ale bude to méně efektivní). Poté můžete použít tento font pro své prvky v CSS, například:
+
+css
+Copy code
+body {
+    font-family: 'Roboto', sans-serif;
+}
+--
+Stálá animace loga:
+.logo {
+    border-radius: 50%; /* Zaoblení obrázku */
+    width: 100px; /* Případně upravte velikost podle potřeby */
+    height: 100px;
+    margin-top: 20px; /* Odsazení od nadpisu */
+    margin-bottom: 40px; /* Větší mezera pod obrázkem */
+    transition: transform 1s ease; /* Přidání přechodové animace */
+    animation: rotateAnimation 2s linear infinite; /* Spuštění animace rotace */
+}
+
+@keyframes rotateAnimation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

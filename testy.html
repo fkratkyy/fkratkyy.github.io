@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filip Krátký | Testy</title>
+    <link href="style.css" rel="stylesheet" media="all">
+</head>
+<body>
+<header>
+    <h1>Filip Krátký | Testy</h1>
+    <img class="logo" src="Logo.webp" alt="Logo">
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Zpět</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="content-container">
+        <div id="domov" class="content">
+            <h2>Testy</h2>
+
+            <div id="quizContainer">
+                <div id="questionBox" class="question"></div>
+                <div class="buttons">
+                    <button onclick="nextQuestion()">Další</button>
+                    <button onclick="endQuiz()">Ukončit</button>
+                </div>
+            </div>
+            <div id="result" class="result" style="text-align:center;"></div>
+        </div>
+    </div>
+</main>
+
+<div style="text-align: center;">
+    <a href="https://filipkratky.neocities.org/">
+        <noscript>
+            <img src="https://toplist.cz/count.asp?id=1835731&logo=mc&njs=1" border="0" alt="TOPlist" width="88" height="60" />
+        </noscript>
+    </a>
+    <p>:-)</p>
+</div>
+
+<footer>
+    <p>Copyright &copy; 2024 Filip Krátký</p>
+</footer>
+
+<script>
+const questions = [
+  {
+    q: "1. Co je hlavní účel swap partition v Linuxu?",
+    options: {
+      A: "Slouží jako virtuální paměť při nedostatku RAM",
+      B: "Slouží k ukládání uživatelských dat",
+      C: "Zvyšuje výkon grafického rozhraní",
+      D: "Slouží ke sdílení souborů mezi uživateli",
+      E: "Zabezpečené úložiště",
+      F: "Termínovaná smlouva dvou ekonomických subjektů o výměně aktiv"
+    },
+    correct: "A"
+  },
+  {
+    q: "2. Jaký je hlavní rozdíl mezi RPM a DEB balíčky?",
+    options: {
+      A: "RPM je formát balíčků používaný v Debianu, zatímco DEB v Red Hat distribucích",
+      B: "DEB je starší formát, který se již nepoužívá",
+      C: "RPM a DEB jsou identické a lze je libovolně zaměňovat",
+      D: "RPM je možné instalovat samostatně, zatímco DEB jen s dependencemi",
+      E: "RPM je používané ve Fedora a Red Hat distribucích, zatímco DEB v Debianu a Ubuntu",
+      F: "RPM je balíček, zatímco DEB je zkratka pro hlupáka"
+    },
+    correct: "E"
+  },
+  {
+    q: "3. Jaké oprávnění má root uživatel?",
+    options: {
+      A: "Má právo sedět",
+      B: "Stejná jako běžný uživatel",
+      C: "Pouze čtení systémových souborů",
+      D: "Přístup ke speciálním nastavením",
+      E: "Přístup na střechu",
+      F: "Neomezený přístup ke všem souborům a procesům"
+    },
+    correct: "F"
+  },
+  {
+    q: "4. Jaký je hlavní rozdíl mezi Debian a Arch Linuxem?",
+    options: {
+      A: "Debian používá pouze grafické rozhraní, Arch pouze příkazový řádek",
+      B: "Arch Linux podporuje pouze 32bitové procesory",
+      C: "Debian je stabilní a vhodný pro servery, Arch Linux je rolling release",
+      D: "Debian není open-source",
+      E: "Debian je pro začátečníky, kdežto Arch Linux výhradně pro zkušené uživatele",
+      F: "Debian používá normální software, kdežto Arch Linux archivy"
+    },
+    correct: "C"
+  },
+  {
+    q: "5. Které z těchto distribucí Linuxu a unixových OS jsou určeny především pro servery?",
+    options: {
+      A: "Ubuntu Server",
+      B: "Všechny zde uvedené",
+      C: "CentOS",
+      D: "Red Hat Enterprise Linux",
+      E: "FreeBSD",
+      F: "OS založené na Unixu se pro servery nehodí, proto se používá Windows Server"
+    },
+    correct: "B"
+  },
+  {
+    q: "6. Co je to init systém v Linuxu?",
+    options: {
+      A: "Program pro instalaci softwaru",
+      B: "Grafické rozhraní pro Linux",
+      C: "Proces, který spravuje start systému a služby",
+      D: "Alternativa k jádru Linuxu",
+      E: "Příkazový řádek",
+      F: "Název jedné z distribucí"
+    },
+    correct: "C"
+  },
+  {
+    q: "7. Která distribuce Linuxu je známá svou modularitou a možností kompilace balíčků?",
+    options: {
+      A: "N3rd OS",
+      B: "Gentoo",
+      C: "Ubuntu",
+      D: "Debian",
+      E: "Fedora",
+      F: "Slackware"
+    },
+    correct: "B"
+  },
+  {
+    q: "8. Co znamená pojem DISTRIBUCE LINUXU?",
+    options: {
+      A: "Varianta linuxového jádra určená pro mobily",
+      B: "Sada softwaru a nástrojů postavená kolem jádra Linuxu",
+      C: "Speciální verze Linuxu určená pro servery",
+      D: "Zastaralá verze Linuxu",
+      E: "Placená verze Linuxu distribuovaná do prodejen a e-shopů",
+      F: "Konkrétní instalace Linuxu na daném počítači"
+    },
+    correct: "B"
+  },
+  {
+    q: "9. Jaký je hlavní rozdíl mezi Linuxem a Windows?",
+    options: {
+      A: "Linux je open-source, zatímco Windows je proprietární software",
+      B: "Linux je pro firmy, zatímco Windows je pro běžné uživatele",
+      C: "Linux je pro odborníky, zatímco Windows pro laiky",
+      D: "Windows používá grafické rozhraní, zatímco Linux pouze příkazový řádek",
+      E: "Linux je pro hacking, zatímco Windows pro hry",
+      F: "Linux je pro nerdy, Windows pro socky, macOS pro normální lidi"
+    },
+    correct: "A"
+  },
+  {
+    q: "10. Co je správné tvrzení o jádře Linuxu?",
+    options: {
+      A: "Jádro Linuxu je uzavřený software",
+      B: "Jádro Linuxu nelze modifikovat",
+      C: "Jádro Linuxu je vyvíjeno pouze společností Microsoft",
+      D: "Jádro Linuxu je základem všech distribucí Linuxu",
+      E: "Jádro je hardware, na kterém OS běží",
+      F: "Jádro je tvrdé semeno uvnitř dužnatého plodu"
+    },
+    correct: "D"
+  },
+  {
+    q: "11. Co je to LTS verze distribuce?",
+    options: {
+      A: "Dlouhodobě podporovaná verze s pravidelnými bezpečnostními aktualizacemi",
+      B: "Verze zabezpečená kromě hesla ještě šifrováním disku",
+      C: "Verze používaná pouze na LT serverech",
+      D: "Verze dostupná pouze pro placené uživatele",
+      E: "Verze s experimentálními funkcemi",
+      F: "Nakažlivá nemoc distribuovaná tajnými agenty"
+    },
+    correct: "A"
+  },
+  {
+    q: "12. Jaká společnost stojí za vývojem distribuce Fedora?",
+    options: {
+      A: "Canonical",
+      B: "SUSE",
+      C: "Arch Linux Community",
+      D: "Red Hat",
+      E: "Computer Systems Research Group",
+      F: "Oracle"
+    },
+    correct: "D"
+  },
+  {
+    q: "13. Který z těchto systémů je standardní init systém v moderních distribucích Linuxu?",
+    options: {
+      A: "SysVinit",
+      B: "Upstart",
+      C: "InitNG",
+      D: "systemd",
+      E: "Kernel",
+      F: "IDK SKIBIDI OHIO"
+    },
+    correct: "D"
+  },
+  {
+    q: "14. Jaký je hlavní účel souboru /etc/passwd?",
+    options: {
+      A: "Obsahuje seznam uživatelských účtů a jejich základní informace",
+      B: "Obsahuje seznam nainstalovaných balíčků v systému",
+      C: "Obsahuje konfiguraci firewallu",
+      D: "Je to spustitelný soubor pro správu uživatelů",
+      E: "Obsahuje uložená hesla",
+      F: "Něco jako Atakdále hslo"
+    },
+    correct: "A"
+  },
+  {
+    q: "15. Jaký je hlavní účel swap partition v Linuxu?",
+    options: {
+      A: "Slouží jako virtuální paměť při nedostatku RAM",
+      B: "Slouží k ukládání uživatelských dat",
+      C: "Zvyšuje výkon grafického rozhraní",
+      D: "Slouží ke sdílení souborů mezi uživateli",
+      E: "Zabezpečené úložiště",
+      F: "Termínovaná smlouva dvou ekonomických subjektů o výměně aktiv"
+    },
+    correct: "A"
+  },
+  {
+    q: "16. Který z těchto souborových systémů je nativní pro Linux?",
+    options: {
+      A: "IDK",
+      B: "HFS+",
+      C: "NTFS",
+      D: "FAT32",
+      E: "APFS",
+      F: "ext4"
+    },
+    correct: "F"
+  },
+  {
+    q: "17. Jaký nástroj se běžně používá pro virtualizaci na Linuxu?",
+    options: {
+      A: "VMware Workstation",
+      B: "VirtualBox",
+      C: "Všechny zde uvedené nástroje",
+      D: "Ani jeden ze zde uvedených nástrojů",
+      E: "KVM",
+      F: "QEMU"
+    },
+    correct: "C"
+  },
+  {
+    q: "18. Která z těchto distribucí je založena na Debianu?",
+    options: {
+      A: "Fedora",
+      B: "OpenSUSE",
+      C: "Ubuntu",
+      D: "Arch Linux",
+      E: "Gentoo",
+      F: "Lesbian"
+    },
+    correct: "C"
+  },
+  {
+    q: "19. Jaký příkaz zobrazí běžící procesy v systému?",
+    options: {
+      A: "listproc",
+      B: "ps",
+      C: "taskrun",
+      D: "procinfo",
+      E: "taskls",
+      F: "ls"
+    },
+    correct: "B"
+  },
+  {
+    q: "20. Co znamená open-source software?",
+    options: {
+      A: "Software, který nelze změnit",
+      B: "Software, který funguje pouze v příkazovém řádku",
+      C: "Otevřený software vyvinutý společností Microsoft",
+      D: "Software, jehož zdrojový kód je volně dostupný a modifikovatelný",
+      E: "Software, který funguje na každé platformě",
+      F: "Software, který je zadarmo"
+    },
+    correct: "D"
+  },
+  {
+    q: "21. Které distribuce Linuxu jsou nejvhodnější pro začátečníky?",
+    options: {
+      A: "Arch Linux a Manjaro",
+      B: "Slackware a Gentoo",
+      C: "OpenSUSE a Kali Linux",
+      D: "Beginner Linux a NOOB distro",
+      E: "Mint a Ubuntu",
+      F: "Začátečníci by se měli Linuxu vyhnout obloukem"
+    },
+    correct: "E"
+  },
+  {
+    q: "22. Jaká organizace spravuje projekt Debian?",
+    options: {
+      A: "Red Hat",
+      B: "Canonical",
+      C: "FreeBSD Foundation",
+      D: "Sun Microsystems",
+      E: "Debian Project",
+      F: "LulzSec"
+    },
+    correct: "E"
+  },
+];
+
+// Zamíchání otázek (Fisher-Yates shuffle)
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+let currentQuestion = 0;
+let score = 0;
+
+shuffleArray(questions); // Zamíchej otázky na začátku
+
+function showQuestion() {
+  const questionBox = document.getElementById("questionBox");
+  const q = questions[currentQuestion];
+  questionBox.innerHTML = `
+    <p>${q.q}</p>
+    <form id="optionsForm">
+      ${Object.entries(q.options).map(([key, val]) => `
+        <label>
+          <input type="radio" name="answer" value="${key}"> ${key}) ${val}
+        </label><br>
+      `).join('')}
+    </form>
+  `;
+}
+
+function nextQuestion() {
+  const optionsForm = document.getElementById("optionsForm");
+  const options = optionsForm.elements['answer'];
+  let selected = null;
+
+  if (!options.length) {
+    if (options.checked) selected = options.value;
+  } else {
+    for (let option of options) {
+      if (option.checked) {
+        selected = option.value;
+        break;
+      }
+    }
+  }
+
+  if (!selected) {
+    alert("Vyberte prosím odpověď.");
+    return;
+  }
+
+  if (selected === questions[currentQuestion].correct) {
+    score++;
+  }
+
+  currentQuestion++;
+
+  if (currentQuestion >= questions.length) {
+    endQuiz();
+  } else {
+    showQuestion();
+  }
+}
+
+function endQuiz() {
+  document.getElementById("quizContainer").style.display = "none";
+  document.getElementById("result").textContent = 
+    `Janičkoo, test ukončen! Správně: ${score} z ${questions.length} (${Math.round(score / questions.length * 100)} %)`;
+}
+
+showQuestion();
+</script>
+
+</body>
+</html>

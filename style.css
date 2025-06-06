@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: radial-gradient(circle at 10% 20%, rgb(99, 55, 255) 0%, rgb(39, 170, 255) 90%);
+    background-repeat: no-repeat;
+    background-size: 100% 100vh;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    text-align: center; 
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px; 
+    border-radius: 3.5px;
+}
+
+header h1 {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+header nav {
+    margin-top: 20px;
+}
+
+header nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 35px; /* Přidáme mezery mezi odkazy */
+    vertical-align: top;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    background-color: #333; 
+    padding: 10px 20px; 
+    border-radius: 3.5px;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Stínování odkazů */
+}
+
+header nav ul li a:hover {
+    background-color: #555; 
+}
+
+.content-container {
+    border: 2px solid white;
+    background-color: white;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1000px; 
+    border-radius: 6px; 
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 3.5px;
+}
+
+img {
+    display: block;
+    margin: auto; 
+    transition: transform 0.3s ease; 
+    margin-bottom: 20px; /* Větší mezera pod obrázky */
+    max-width: 100%; /* Obrázky se přizpůsobí šířce rodičovského kontejneru */
+    height: auto; /* Obrázky si zachovají původní poměr stran */
+}
+
+.logo {
+    border-radius: 50%; 
+    width: 100px;
+    height: 100px;
+    margin-top: 20px; 
+    margin-bottom: 40px;
+    position: relative; 
+    overflow: hidden;
+    animation: rotate 2s linear infinite; 
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg); 
+  }
+  to {
+    transform: rotate(360deg); 
+  }
+}
+
+.nav-divider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #000; /* Barva pásu */
+}
+
+.prazdno {
+    padding-bottom: 125px; /* nastaví dolní vnitřní odsazení na 20px */
+}
+
+/* Upravené styly pro sekci Odkazy */
+#odkazy a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#odkazy a:hover {
+    background-color: #0056b3;
+}
+
+#kontakty a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#kontakty a:hover {
+    background-color: #0056b3;
+}
+
+#kontakty ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#kontakty ul li {
+    margin-bottom: 10px;
+}
+
+/* Media queries pro responsivní design */
+@media only screen and (max-width: 600px) {
+    header h1 {
+        font-size: 24px; /* Zmenšíme velikost nadpisu na menších obrazovkách */
+    }
+
+    header nav ul li a {
+        padding: 8px 16px; /* Zmenšíme polštářky odkazů na menších obrazovkách */
+    }
+
+    .content-container {
+        padding: 10px; /* Zmenšíme polštářky obsahu na menších obrazovkách */
+    }
+
+    .logo {
+        width: 80px; /* Zmenšíme velikost loga na menších obrazovkách */
+        height: 80px;
+    }
+}
+
+/* Media queries pro responsivní design */
+@media only screen and (max-width: 600px) {
+    /* Pro menší obrazovky */
+    .content iframe {
+        max-width: 100%; /* Nastavit maximální šířku na 100% */
+        height: auto; /* Zachovat poměr stran */
+    }
+}
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap; /* Přidáno pro zajištění zobrazení vedle sebe */
+    justify-content: center; /* Zarovná obrázky na střed */
+    margin-top: 20px;
+}
+
+.gallery-container img {
+    width: 200px; /* Zvětšení šířky obrázků */
+    height: 150px; /* Zvětšení výšky obrázků */
+    object-fit: cover; /* Zajistí, že obrázky se pěkně vejdou do daných rozměrů */
+    margin: 10px; /* Mezera kolem obrázků */
+}
+
+/* Na menších obrazovkách */
+@media (max-width: 600px) {
+    .gallery-container img {
+        width: 100px; /* Šířka obrázků na malých obrazovkách */
+        height: 75px; /* Výška obrázků na malých obrazovkách */
+    }
+}
+
+/* Tlačítka na střed */
+.buttons {
+    text-align: center; /* Zarovnání tlačítek na střed */
+    margin: 20px 0; /* Mezery nad a pod tlačítky */
+}
+
+.buttons button {
+    padding: 10px 20px; /* Vnitřní odsazení tlačítek */
+    margin: 0 5px; /* Mezery mezi tlačítky */
+    background-color: #007bff; /* Barva pozadí tlačítek */
+    color: white; /* Barva textu */
+    border: none; /* Odstranění rámečku */
+    border-radius: 5px; /* Zaoblení rohů */
+    cursor: pointer; /* Ukazatel ruky při hoveru */
+    transition: background-color 0.3s; /* Hladká změna barvy pozadí */
+}
+
+.buttons button:hover {
+    background-color: #0056b3; /* Tmavší barva při hoveru */
+}
