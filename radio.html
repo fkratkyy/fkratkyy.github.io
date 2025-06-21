@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rádio Dechovka - Stylový přehrávač</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #fefefe, #f1f1f1);
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .player {
+      background: #fff;
+      padding: 2rem 3rem;
+      border-radius: 20px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      width: 320px;
+      text-align: center;
+      user-select: none;
+    }
+
+    .player h1 {
+      margin: 0 0 1rem;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #d62828;
+    }
+
+    .btn-playpause {
+      background: #d62828;
+      border: none;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      color: white;
+      cursor: pointer;
+      outline: none;
+      transition: background 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem auto 0;
+      box-shadow: 0 6px 12px rgba(214, 40, 40, 0.4);
+    }
+
+    .btn-playpause:hover {
+      background: #b71c1c;
+      box-shadow: 0 8px 16px rgba(183, 28, 28, 0.6);
+    }
+
+    .status {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      color: #555;
+      min-height: 1.2em;
+    }
+
+    .playtime {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #777;
+      min-height: 1.2em;
+      /* font-family: monospace;  <-- smaž nebo komentuj */
+    }
+    }
+  </style>
+</head>
+<body>
+  <div class="player">
+    <h1>🎺 Rádio Dechovka</h1>
+    <button aria-label="Play/Pause" class="btn-playpause" id="playPauseBtn">
+      <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="white">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+      <svg id="iconPause" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="white" style="display:none;">
+        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+      </svg>
+    </button>
+    <div class="status" id="statusText">Načítání...</div>
+    <div class="playtime" id="playtimeText">00:00</div>
+    <audio id="audio" preload="none" src="http://icecast5.play.cz/dechovka128.mp3"></audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById('audio');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const statusText = document.getElementById('statusText');
+    const playtimeText = document.getElementById('playtimeText');
+    const playIcon = document.getElementById('iconPlay');
+    const pauseIcon = document.getElementById('iconPause');
+
+    let isPlaying = false;
+    let intervalId = null;
+
+    function updateStatus(text) {
+      statusText.textContent = text;
+    }
+
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+      const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function startTimer() {
+      intervalId = setInterval(() => {
+        playtimeText.textContent = formatTime(audio.currentTime);
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
+
+    playPauseBtn.addEventListener('click', () => {
+      if (!isPlaying) {
+        audio.play().then(() => {
+          isPlaying = true;
+          playIcon.style.display = 'none';
+          pauseIcon.style.display = 'block';
+          updateStatus('Přehrává se');
+          startTimer();
+        }).catch(() => {
+          updateStatus('Přehrávání bylo zablokováno (zkus kliknout znovu)');
+        });
+      } else {
+        audio.pause();
+        isPlaying = false;
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+        updateStatus('Pozastaveno');
+        stopTimer();
+      }
+    });
+
+    audio.addEventListener('waiting', () => updateStatus('Načítání streamu...'));
+    audio.addEventListener('playing', () => {
+      updateStatus('Přehrává se');
+      if (!intervalId) startTimer();
+    });
+    audio.addEventListener('pause', () => {
+      updateStatus('Pozastaveno');
+      stopTimer();
+    });
+    audio.addEventListener('error', () => updateStatus('Chyba přehrávání'));
+  </script>
+</body>
+</html>
